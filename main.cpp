@@ -1,14 +1,12 @@
 
 #include<iostream>
 #include <assert.h>
-#include <cstring>
-#include <vector>
 #include <sstream>
 
 using namespace std;
 
 //define the datestruct
-template <typename E> class Stack{
+template <typename E> class Stack {
 private:
     void operator =(const Stack&){}
     Stack(const Stack&){}
@@ -147,7 +145,6 @@ double getResult(string sourse){
 bool isOK(string s){
     bool isExp = 1;
     int len = s.length();
-    char match;
     int result = 0;
     //括号匹配
     for (int i = 0; i < len; ++i) {
@@ -163,6 +160,24 @@ bool isOK(string s){
             if(result < 0){//括号顺序检测
                 cout<<"Lack of ("<<endl;
                return isExp = 0;
+            }
+            if(i<len-1) {
+                switch (s[i + 1]) {
+                       case '#':
+                       case '0':
+                       case '1':
+                       case '2':
+                       case '3':
+                       case '4':
+                       case '5':
+                       case '6':
+                       case '7':
+                       case '8':
+                       case '9':
+                       case '.':
+                           cout << "Lacking operator after ')'" << endl;
+                            isExp = 0;
+                }
             }
         }
         //字符内容判断
@@ -180,7 +195,7 @@ bool isOK(string s){
                         case '/':
                         case '.':
                             cout<<"There have double operation together"<<endl;
-                            isExp = 0;
+                            isExp = 0;//(3+2*5)/3
                     }
                 }
             }
@@ -200,18 +215,19 @@ bool isOK(string s){
             case '.':
                 break;
             default:{
-                cout<<"Wrong expresion!"<<endl;
+                cout<<"Wrong expression!"<<endl;
                 isExp = 0;
-                return isExp ;
+               return isExp ;
             }
         }
+//test
         if(s[i] == '.'){
             int j =i+1 ;
             while(j<len){
                 if (s[j] =='+'||s[j] =='/'||s[j] =='-'||s[j] =='*'){
                      break;
                 }else if(s[j] =='.'){
-                    cout<<"This is a wrong expretion with two '.' together"<<endl;
+                    cout<<"This is a wrong expression with two '.' together"<<endl;
                     isExp = 0;
                 }
                 j++;
@@ -225,7 +241,7 @@ bool isOK(string s){
         case '*':
         case '/':
         case '.':
-            cout<<"Wrong expresion at the first"<<endl;
+            cout<<"Wrong expression at the first"<<endl;
             isExp = 0;
     }
     switch (s[len-1]){
@@ -234,7 +250,7 @@ bool isOK(string s){
         case '-':
         case '*':
         case '/':
-            cout<<"Wrong expresion at the Last"<<endl;
+            cout<<"Wrong expression at the Last"<<endl;
             isExp = 0;
     }
     if(result > 0){
@@ -257,7 +273,7 @@ void expget(string str){
         temp += str[i++];
     }
     if(!isOK(temp)){
-        cout<<"This is not a expresion !"<<endl;
+        cout<<"This is not a expression !"<<endl;
         return;
     }
     //中缀向后缀处理
