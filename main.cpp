@@ -81,7 +81,7 @@ int prior (char a){
             break;
         }
         case '(':{
-            priority = 3;
+            priority = 0;
             break;
         }
         case '#':{
@@ -220,7 +220,7 @@ bool isOK(string s){
                return isExp ;
             }
         }
-//test
+//testn
         if(s[i] == '.'){
             int j =i+1 ;
             while(j<len){
@@ -347,17 +347,23 @@ void expget(string str){
 }
 //业务逻辑代码
 void todo(){
-
-    cout<<"Please print your expression:"<<endl;
     string will,exp;
-    cin>>exp;
-    expget(exp);
+  //cout<<"If read file , print 1,else print 2"<<endl;
+    char flag = '2';
+    if(flag == '2'){
+        cout<<"Please print your expression:"<<endl;
+        getline(cin,exp);
+        expget(exp);
+
+    }
     cout<<"Do you want to exist? Yes=1,No=0"<<endl;
     cin>>will;
+    getchar();
     if(will == "1")
         exit(0);
     else
         todo();
+
     return;
 }
 
